@@ -1,0 +1,100 @@
+PKG_LIST=$(ls -1 /var/db/pkg)
+if [ -f /etc/ssh/ssh_known_hosts ]; then
+	HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts /etc/ssh/ssh_known_hosts | sort | uniq)
+else
+	HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts | sort | uniq)
+fi
+
+if [ -f ~/.config/rclone/rclone.conf ]; then
+	RCLONE_LIST=$(rclone listremotes)
+	set -A complete_rclone_1 -- about authorize cachestats cat check cleanup config copy copyto copyurl cryptcheck cryptdecode dbhashsum dedupe delete deletefile genautocomplete gendocs hashsum help link listremotes ls lsd lsf lsjson lsl md5sum mkdir move moveto ncdu obscure purge rc rcat rcd rmdir rmdirs serve settier sha1sum size sync touch tree version
+	set -A complete_rclone -- $RCLONE_LIST
+fi
+
+function reload_completions {
+	if [ -e ~/.ksh_completions ]; then
+		. ~/.ksh_completions
+		echo "ksh completions reloaded"
+	fi
+}
+
+set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
+
+pgrep -fq '/usr/sbin/vmd'
+if [ $? = 0 ]; then
+	set -A complete_vmctl -- console load reload start stop reset status send receive
+	set -A complete_vmctl_2 -- $(vmctl status | awk '!/NAME/{print $NF}')
+fi
+
+pgrep -fq '/usr/local/sbin/mpd'
+if [ $? = 0 ]; then
+	set -A complete_mpc_1 -- add crop current del play next prev pause pause-if-playing toggle cdprev stop seek clear outputs enable disable toggleoutput outputset shuffle move playlist listall ls lsplaylists load insert prio save rm volume repeat random single consume search searchadd find findadd searchplay list crossfade clearerror mixrampdb mixrampdelay update rescan sticker stats version idle idleloop replaygain channels sendmessage waitmessage subscribe
+	set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
+fi
+
+#PASS_LIST=$(find .password-store/ -type f | grep "gpg$" | \
+#	sed 's/^\.password-store\///' | \
+#	sed 's/\.gpg$//')
+#SPASS_LIST=$(find .secret-store/ -type f | grep "gpg$" | \
+#	sed 's/^\.password-store\///' | \
+#	sed 's/\.gpg$//')
+
+#set -A complete_pass -- $PASS_LIST ls find show grep insert edit generate rm mv cp git help version
+#set -A complete_spass -- $SPASS_LIST ls find show grep insert edit generate rm mv cp git help version
+
+if [ -e /usr/local/bin/gopass ]; then
+	PASS_LIST=$(gopass ls -f)
+	set -A complete_gopass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
+	set -A complete_pass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
+#	set -A complete_bpass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
+fi
+
+if [ -d ~/.opm ]; then
+	set -A complete_opm_1 -- -b -c -d -h -m add insert del rm list ls encrypt show get verify search
+	set -A complete_opm -- $(/usr/local/bin/opm -b ls)
+fi
+
+set -A complete_pkg_delete -- $PKG_LIST
+set -A complete_pkg_info -- $PKG_LIST
+
+set -A complete_pkg_1 -- add check create delete info
+set -A complete_pkg_2 -- $PKG_LIST
+
+set -A complete_ssh -- $HOST_LIST
+set -A complete_scp -- $HOST_LIST
+set -A complete_mosh -- $HOST_LIST
+
+set -A complete_rcctl_1 -- disable enable get ls order set restart start stop
+set -A complete_rcctl_2 -- $(rcctl ls all)
+
+set -A complete_signify_1 -- -C -G -S -V
+set -A complete_signify_2 -- -q -p -x -c -m -t -z
+set -A complete_signify_3 -- -p -x -c -m -t -z
+
+set -A complete_make_1 -- install clean repackage reinstall
+
+set -A complete_beet_1 -- clearart config duplicates embedart extractart fetchart fields fingerprint help import lastgenre list lyrics mbsync missing modify move mpdstats remove scrub splupdate as stats submit update version web write
+
+set -A complete_emacs -- --daemon --debug-init
+set -A complete_emacsclient -- -c -t
+
+set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
+
+set -A complete_git_1 -- pull push mpull mpush clone checkout status commit clean config cherry-pick
+
+set -A complete_hg_1 -- add annotate clone commit diff export forget init log merge pull push remove serve status summary update help
+
+set -A complete_ifconfig_1 -- $(ifconfig | grep ^[a-z] | cut -d: -f1)
+
+if [ -f /dev/mixer ]; then
+	set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
+fi
+
+set -A complete_lein_1 -- change check classpath clean compile deploy deps do help install jar javac new plugin pom release repl retest run search show-profiles test trampoline uberjar update-in upgrade vcs version with-profile
+
+if [ -d ~/.dynamic-colors ]; then
+	set -A complete_dynamic_colors -- help cycle init list switch create edit audit
+	set -A complete_dynamic_colors_2 -- $(dynamic_colors list)
+fi
+
+set -A complete_man_1 -- $(MANPATH=/usr/share/man man -k Nm~. | cut -d\( -f1 | tr -d ,)

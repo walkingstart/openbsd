@@ -1,0 +1,408 @@
+# set 256color support (doesnt work with older apps like abook)
+#export TERM="screen-256color"
+# export TERM="xterm-256color"
+
+# find alternative apps if it is installed on your system
+find_alt() { for i;do which "$i" >/dev/null && { echo "$i"; return 0;};done;return 1; }
+
+# set the default program
+# the first program in the array that is detected on your system will be chosen as the default
+#export OPENER=$(find_alt xdg-open exo-open gnome-open )
+export BROWSER=$(find_alt firefox chromium chromium-browser qutebrowser google-chrome  $OPENER )
+#export BROWSERCLI=$(find_alt w3m links2 links lynx elinks $OPENER )
+export COMICER=$(find_alt zathura mcomix comix $OPENER )
+#export EBOOKER=$(find_alt ebook-viewer $OPENER )
+export EDITOR=$(find_alt vim emacs nano leafpad gedit pluma $OPENER )
+#export WORDPROCESSOR=$(find_alt wordgrinder $OPENER )
+export FILEMANAGER=$(find_alt pcmanfm thunar nautilus dolphin spacefm enlightenment_filemanager $OPENER )
+export MUSICER=$(find_alt mplayer mpg123 mpv cvlc $OPENER )
+export PAGER=$(find_alt less more most)
+export PLAYER=$(find_alt mplayer mpv cvlc $OPENER )
+export READER=$(find_alt mupdf zathura $OPENER )
+#export ROOTER=$(find_alt gksudo kdesudo )
+export IMAGEVIEWER=$(find_alt gpicview feh $OPENER )
+
+# }}}
+#-------- Configurations {{{
+#------------------------------------------------------
+cfg-aliasrc() { $EDITOR ~/.aliasrc ;}
+cfg-cwm() { $EDITOR ~/.cwmrc ;}
+#cfg-abookrc() { $EDITOR ~/.abook/abookrc ;}
+#cfg-addressbook() { $EDITOR ~/.abook/addressbook ;}
+fg-kshrc() { $EDITOR ~/.kshrc ;}
+#cfg-blocklist() { $EDITOR ~/.scripts/blocklist.sh ;}
+#cfg-clonezilla() { sudo $EDITOR /etc/drbl/drbl.conf ;}
+# https://wiki.archlinux.org/index.php/Cursor_Themes#Choosing_and_Configuring_Cursor_Themes
+#cfg-cursor() { $EDITOR ~/.icons/default/index.theme ;}
+#cfg-cursor-list() { ls ~/.icons ;}
+#cfg-emacs() { $EDITOR ~/.emacs ;}
+#cfg-emulationstation() { $EDITOR ~/.emulationstation/es_systems.cfg ;}
+#cfg-emulationstation-input() { $EDITOR ~/.emulationstation/es_input.cfg ;}
+#cfg-flexget() { $EDITOR ~/.flexget/config.yml ;}
+#cfg-fstab() { sudo $EDITOR /etc/fstab ;}
+#cfg-gitignore() { $EDITOR ~/Public/dotfiles/.gitignore ;}
+#cfg-giftd() { $EDITOR ~/.giFT/giftd.conf ;}
+#cfg-group() { sudo $EDITOR /etc/group ;}
+#cfg-grub() { sudo $EDITOR /etc/default/grub ;}
+#cfg-hintrc() { $EDITOR ~/.hintrc ;}
+cfg-hosts() { sudo $EDITOR /etc/hosts ;}
+#cfg-i3wm() { $EDITOR ~/.i3/config ;}
+#cfg-inputrc() { $EDITOR ~/.inputrc ;}
+#cfg-kodi-keyboard() { $EDITOR ~/.kodi/userdata/keymaps/keyboard.xml ;}
+#cfg-kodi-confluencethumbnailview() { sudo $EDITOR /usr/share/kodi/addons/skin.confluence/720p/MyVideoNav.xml ;}
+#cfg-lgogdownloader() { $EDITOR ~/.config/lgogdownloader/config.cfg ;}
+#cfg-livestreamer() { $EDITOR ~/.livestreamerrc ;}
+#cfg-mailcap() { $EDITOR ~/.mailcap ;}
+#cfg-mbsyncrc() { $EDITOR ~/.mbsyncrc ;}
+#cfg-mc() { $EDITOR ~/.config/mc/ini ;}
+#cfg-mcomix() { $EDITOR ~/.config/mcomix/keybindings.conf ;}
+#cfg-mpd() { $EDITOR ~/.mpd/mpd.conf ;}
+#cfg-mplayer() { $EDITOR ~/.mplayer/config ;}
+#cfg-mpv() { $EDITOR ~/.config/mpv/input.conf ;}
+#cfg-mocp() { $EDITOR ~/.moc/config ;}
+#cfg-muttrc() { $EDITOR ~/.muttrc ;}
+#cfg-nanorc() { $EDITOR ~/.nanorc;}
+#cfg-nap() { $EDITOR ~/.nap/napconf ;}
+#cfg-ncmpcpp() { $EDITOR ~/.ncmpcpp/config ;}
+#cfg-ncmpcpp-bindings() { $EDITOR ~/.ncmpcpp/bindings ;}
+#cfg-newsbeuter() { $EDITOR ~/.newsbeuter/config ;}
+#cfg-newsbeuter-queue() { $EDITOR ~/.newsbeuter/queue ;}
+#cfg-newsbeuter-urls() { $EDITOR ~/.newsbeuter/urls ;}
+#cfg-pastebinit() { $EDITOR ~/.pastebinit.xml ;}
+#cfg-periscope() { $EDITOR ~/.config/periscope/config ;}
+#cfg-pianobar() { $EDITOR ~/.config/pianobar/config ;}
+#cfg-pianobar-libao() { sudo $EDITOR /etc/libao.conf ;}
+#cfg-profile() { $EDITOR ~/.profile ;}
+#cfg-pulseaudio() { sudo $EDITOR /etc/pulse/default.pa ;}
+#cfg-pyload() { $EDITOR ~/.pyload/pyload.conf ;}
+#cfg-pyradio() { $EDITOR ~/.pyradio.csv ;}
+#cfg-qutebrowser() { $EDITOR ~/.config/qutebrowser/qutebrowser.conf ;}
+#cfg-qutebrowser-keys() { $EDITOR ~/.config/qutebrowser/keys.conf ;}
+#cfg-qutebrowser-quickmarks() { $EDITOR ~/.config/qutebrowser/quickmarks ;}
+#cfg-quicktile() { $EDITOR ~/.config/quicktile.cfg ;}
+cfg-ranger() { $EDITOR ~/.config/ranger/rc.conf ;}
+#cfg-ranger-rifle() { $EDITOR ~/.config/ranger/rifle.conf ;}
+#cfg-ranger-commands() { $EDITOR ~/.config/ranger/commands.py ;}
+#cfg-retroarch() { $EDITOR ~/.config/retroarch/retroarch.cfg ;}
+#cfg-rtv() { $EDITOR ~/.config/rtv/rtv.cfg ;}
+#cfg-samba() { sudo $EDITOR /etc/samba/smb.conf ;}
+#cfg-skippyxd() { $EDITOR ~/.skippy-xd.rc ;}
+#cfg-slrnrc() { $EDITOR ~/.slrnrc ;}
+#cfg-ssh-client() { sudo $EDITOR /etc/ssh/ssh_config ;}
+#cfg-ssh-daemon() { sudo $EDITOR /etc/ssh/sshd_config ;}
+#cfg-sudoers() { sudo $EDITOR /etc/sudoers ;}
+#cfg-surfraw() { $EDITOR ~/.config/surfraw/bookmarks ;}
+#cfg-surfraw-conf() { $EDITOR ~/.config/surfraw/conf ;}
+#cfg-syncthing() { $EDITOR ~/.config/syncthing/config.xml ;}
+cfg-tmuxrc() { $EDITOR ~/.tmux.conf ;}
+#cfg-torrentflix() { torrentflix --config=$EDITOR ;}
+#cfg-tpb() { $EDITOR ~/.scripts/tpb.sh ;}
+#cfg-transmission-daemon() { $EDITOR ~/.config/transmission-daemon/settings.json ;}
+#cfg-transmission-ncurse() { $EDITOR ~/.config/transmission-remote-cli/settings.cfg ;}
+#cfg-trz() { $EDITOR ~/.scripts/trz.sh ;}
+#cfg-urlview() { $EDITOR ~/.urlview ;}
+#cfg-updatedb() { sudo $EDITOR /etc/updatedb.conf ;}
+cfg-vimrc() { $EDITOR ~/.vimrc ;}
+#cfg-w3m() { $EDITOR ~/.w3m/config ;}
+#cfg-w3m-keymap() { $EDITOR ~/.w3m/keymap ;}
+#cfg-w3m-urimethodmap() { $EDITOR ~/.w3m/urimethodmap ;}
+#cfg-wegorc() { $EDITOR ~/.wegorc ;}
+#cfg-xboxdrv() { sudo $EDITOR /etc/default/xboxdrv ;}
+cfg-xresources() { $EDITOR ~/.Xresources ;}
+#cfg-yaourtrc() { $EDITOR ~/.yaourtrc ;}
+#cfg-zshrc() { $EDITOR ~/.zshrc ;}
+#cfg-zurlrc() { $EDITOR ~/.zurlrc ;}
+#}}}
+#-------- Configurations Reload {{{
+#------------------------------------------------------
+#rld-bashrc() { source ~/.bashrc ;}
+rld-font() { fc-cache -v -f ;}
+#rld-grub() { sudo grub-mkconfig -o /boot/grub/grub.cfg ;}
+#rld-updatedb() { sudo updatedb ;}
+#rld-xdefaults() { xrdb ~/.Xdefaults ;}
+#rld-xmodmap() { xmodmap ~/.Xmodmap ;}
+rld-xresources() { xrdb -load ~/.Xresources ;}
+#rld-zshrc() { source ~/.zshrc ;}
+rld-kshrc() { source ~/.kshrc ;}
+rld-cwmrc() { source ~/.cwmrc ;}
+# }}}
+#-------- Alias (Substitution) {{{
+#------------------------------------------------------
+# DESC: alias for mainly for existing commands
+# vim: syntax=sh
+# # ksh aliases to make a life just a tad bit more bearable
+#
+# # handy dandy system related
+# alias ls="colorls -GF"
+# use colorls if it's installed, plain old ls otherwise
+alias ls="colorls -GF"
+ alias ll='ls -lhA'
+ alias l="ls"
+ alias df="df -h"
+ alias cp="cp -r"
+ alias chown="chown -R"
+ alias mkdir="mkdir -p"
+ alias md="mkdir -p"
+ alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
+#
+ alias c="clear"
+# alias reload=". $HOME/.kshrc"
+# alias usr1="pkill -USR1"
+#
+# alias ..="cd .."
+# alias ...="cd ../.."
+# alias ....="cd ../../.."
+#
+# # package management
+ alias pkga="doas pkg_add"
+ alias pkgu="doas pkg_add -u"
+ alias pkgd="doas pkg_delete"
+ alias pkgi="pkg_info"
+ alias pkgq="pkg_info -Q"
+ alias pkgl="pkg_locate"
+#
+# alias daim="doas make install"
+#
+# # colorized logs for easier perusal
+# alias dlog="colortail -k  /usr/local/share/examples/colortail/conf.daemon -f /var/log/daemon"
+# alias mlog="colortail -k  /usr/local/share/examples/colortail/conf.messages -f /var/log/messages"
+# alias slog="colortail -k  /usr/local/share/examples/colortail/conf.secure -f /var/log/secure"
+# alias alog="colortail -k  /usr/local/share/examples/colortail/conf.authlog -f /var/log/authlog"
+#
+# # text editors
+# alias vi="nvim"
+# alias vim="nvim"
+# alias e="emacsc"
+# alias em="emacsc"
+#
+# # misc
+# alias xclip="xclip -selection clipboard"
+# alias xr="xrdb -merge ~/.Xresources"
+# alias dash="dash -l"
+#
+# # git
+# alias gc="git clone"
+# alias ga="git add"
+# alias grm="git rm"
+# alias gcm="git commit -m"
+# alias gp="git push"
+# alias gpom="git push origin master"
+# alias gpod="git push origin devel"
+#alias pka='sudo pkg_add -Iv'
+#alias pki='sudo pkg_info -Q'
+#alias pkd='sudo pkg_delete '
+#alias bc='bc -q -l'					# dont show opening msg, use math library
+#alias cal='cal -3'					# show 3 months
+#alias cp='cp -aiv'					# cp prompt confirmation
+#alias df='df -h'				# human readable, print filetype, and total
+alias du='du  -ch'					# max depth, human readable
+#alias emacs='emacs -nw'					# cli mode
+#alias feh='feh --auto-zoom --scale-down -g 1280x800 -B white'
+alias free='free -h'					# human readable
+#alias info='info --vi-keys'		# GNU info act like man command
+#alias ln='ln -iv'
+#alias lsblk='lsblk -o "KNAME,HOTPLUG,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID,MODEL,SERIAL"'
+#alias mkdir='mkdir -p '				# create if not exist, verbose
+#alias mocp='padsp mocp'                                 # moc player working with pulseaudio
+#alias mount='mount | column -t'				# align in column
+alias mv='mv -iv'					# mv prompt confirmation
+#alias nano='nano -c -$'					# word wrapping
+#alias nvlc='nvlc --no-color'				# vlc black/white color
+#alias pdfgrep='pdfgrep -in'				# ignorecase, page number
+#alias qcp='qcp -f do'                  # renameutils bulk copy (destination column only)
+#alias qmv='qmv -f do'               # renameutils bulk rename (destination column only)
+#alias rm='rm -Iv --preserve-root'			# rm interactive, prompt once only
+#alias sr='sr -browser=$BROWSERCLI'			# open in cli browser
+#alias surfraw='surfraw -browser=$BROWSER'		# open in gui browser
+alias wget='wget -N -c'					# continues/resumes
+#alias youtube-viewer='youtube-viewer -C -f -4 --results=6'	# color, fullscreen, 480p, number of results
+#alias visudo='sudo EDITOR="$EDITOR" visudo'
+
+#-------- Wget (Retrieve Files From The Web) {{{
+#------------------------------------------------------
+wget-extension() {
+  if [ $# -lt 2 ]; then
+    echo -e "Download all files with specific extension on a webpage"
+    echo -e "\nUsage: $0 <file_extension> <url>"
+    echo -e "\nExample:\n$0 mp4 http://example.com/files/"
+    echo -e "$0 mp3,ogg,wma http://samples.com/files/"
+    echo -e "\nGoogle: http://lmgtfy.com/?q=intitle%3Aindex.of+mp3+-html+-htm+-php+-asp+-txt+-pls+madonna"
+    return 1
+  fi
+
+  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
+  mkdir -pv "$outputdir_name"
+  cd "$outputdir_name" && wget -r -l1 -H -t1 -nd -N -np -A "$1" -erobots=off "$2"
+}
+
+## }}}
+#-------- Alias (Good List) {{{
+#------------------------------------------------------
+# DESC: custom alias
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+#alias empty='gvfs-trash --empty'			# empty trash globally (all partitions)
+#alias garbage='gvfs-trash -f'
+#alias garbage-list='gvfs-ls -h trash://'
+#alias garbage-empty='gvfs-trash --empty'		# empty trash globally (all partitions)
+#alias t="todo.sh"                                       # todotxt.sh program
+#alias trash='trash-put -v'
+#alias vless="/usr/share/vim/vim74/macros/less.sh"       # vim as a pager
+#alias vradio="vim ~/.pyradio.csv && killall mpg123"    # vim as radio player using pyradio.csv
+#alias wttr='curl wttr.in'                               # wego weather forcast using only curl
+#alias wttr-help='curl wttr.in/:help'
+
+# }}}
+#-------- Functions (Oneliner) {{{
+#------------------------------------------------------
+
+cpbak() { cp $1{,.bak} ;}		          # create backup copy
+#down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}
+#killall-zombies() { kill -HUP $(ps -A -ostat,ppid | grep -e '[zZ]'| awk '{ print $2 }') ;}
+#mkdircd() { mkdir -p -v $1; cd $1 ;}	          # create folder then cd into it
+#nohup-command() { nohup "$@" >/dev/null 2>&1& }   # background a process w/o error msg
+#open() { xdg-open "$@" > /dev/null 2>&1 ;}        # open with default GUI program
+
+# DESC: cli calculator (Ctrl+D to exit)
+# DEMO: http://www.youtube.com/watch?v=JkyodHenTuc
+# LINK: http://docs.python.org/library/math.html
+calc() {
+  if which python2 &>/dev/null; then
+    python2 -ic "from __future__ import division; from math import *; from random import *"
+  elif which python3 &>/dev/null; then
+    python3 -ic "from math import *; import cmath"
+  elif which bc &>/dev/null; then
+    bc -q -l
+  else
+    echo "Requires python2, python3 or bc for calculator features"
+  fi
+}
+
+#}}}
+#-------- Screenshot {{{
+#------------------------------------------------------
+# DEMO: http://www.youtube.com/watch?v=Hh8G1aBp8gc
+# DESC: take screenshot fullscreen, single window or draw a box
+export PATH_SCREENSHOT=~/picture/screenshots
+pix() { scrot -d 5 "$PATH_SCREENSHOT/fullscr_`date +'%F_%Hh%Ms%S'`.png" ;}
+pix-area() { sleep 2 && scrot -s "$PATH_SCREENSHOT/windowed_`date +'%F_%Hh%Ms%S'`.png" ;}
+
+
+
+####################
+##### INTERNET #####
+####################
+
+#-------- Youtube-dl (Stream|Download|RipAudio) {{{
+#------------------------------------------------------
+# DEMO: https://www.youtube.com/watch?v=MFxlwVhwayg
+# DESC: download/stream media from many online sites
+youtube-dl-stream() { youtube-dl -o - "$1" | $PLAYER - ;}
+
+# }}}
+#-------- Wget (Retrieve Files From The Web) {{{
+#------------------------------------------------------
+# http://stackoverflow.com/a/18709707
+wget-extension() {
+  if [ $# -lt 2 ]; then
+    echo -e "Download all files with specific extension on a webpage"
+    echo -e "\nUsage:   $0 <file_extension> <url>"
+    echo -e "\nExample: $0 mp3 http://example.com/files/"
+    echo -e "\nGoogle: http://lmgtfy.com/?q=intitle%3Aindex.of+mp3+-html+-htm+-php+-asp+-txt+-pls+madonna"
+    return 1
+  fi
+
+  savepath=~/Downloads
+  outputdir_name=$(echo "$2" | rev | cut -d\/ -f2 | rev)
+
+  mkdir -pv "$savepath/$outputdir_name"
+  cd "$savepath/$outputdir_name" && wget -r -l1 -H -t1 -nd -N -np -A "$1" -erobots=off "$2"
+}
+
+
+
+#-------- Transmission CLI v2 {{{
+#------------------------------------------------------
+# DEMO: http://www.youtube.com/watch?v=ee4XzWuapsE
+# DESC: lightweight torrent client; interface from cli, webui, ncurses, and gui
+# WEBUI:  http://localhost:9091/transmission/web/
+# 	  http://192.168.1.xxx:9091/transmission/web/
+
+tsm-clearcompleted() {
+  transmission-remote -l | grep 100% | grep Done | \
+  awk '{print $1}' | xargs -n 1 -I % transmission-remote -t % -r
+}
+
+# display numbers of ip being blocked by the blocklist (credit: smw from irc #transmission)
+tsm-count() {
+  echo "Blocklist rules:" $(curl -s --data \
+  '{"method": "session-get"}' localhost:9091/transmission/rpc -H \
+  "$(curl -s -D - localhost:9091/transmission/rpc | grep X-Transmission-Session-Id)" \
+  | cut -d: -f 11 | cut -d, -f1)
+}
+
+# DEMO: http://www.youtube.com/watch?v=TyDX50_dC0M
+# DESC: merge multiple ip blocklist into one
+# LINK: https://github.com/gotbletu/shownotes/blob/master/blocklist.sh
+tsm-blocklist() {
+  echo -e "${Red} Stopping Transmission Daemon ${Color_Off}"
+    killall transmission-daemon
+  echo -e "${Yellow} Updating Blocklist ${Color_Off}"
+    ~/.scripts/blocklist.sh
+  echo -e "${Green} Restarting Transmission Daemon ${Color_Off}"
+    transmission-daemon
+    sleep 3
+  echo -e "${Red}--------------- Number of IP Blocking -------------${Color_Off}"
+    tsm-count
+}
+tsm-altdownloadspeed() { transmission-remote --downlimit "${@:-900}" ;}	# download default to 900K, else enter your own
+tsm-altdownloadspeedunlimited() { transmission-remote --no-downlimit ;}
+tsm-limitupload() { transmission-remote --uplimit "${@:-10}" ;}	# upload default to 10kpbs, else enter your own
+tsm-limituploadunlimited() { transmission-remote --no-uplimit ;}
+tsm-askmorepeers() { transmission-remote -t"$1" --reannounce ;}
+tsm-daemon() { transmission-daemon ;}
+tsm-quit() { pkill transmission-daemon ;}
+tsm-add() { transmission-remote --add "$1" ;}
+tsm-pause() { transmission-remote -t"$1" --stop ;}		# <id> or all
+tsm-start() { transmission-remote -t"$1" --start ;}		# <id> or all
+tsm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # delete data also
+tsm-remove() { transmission-remote -t"$1" --remove ;}		# leaves data alone
+tsm-info() { transmission-remote -t"$1" --info ;}
+tsm-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
+tsm-grep() { transmission-remote --list | grep -i "$1" ;}
+tsm() { transmission-remote --list ;}
+
+# DEMO: http://www.youtube.com/watch?v=hLz7ditUwY8
+# LINK: https://github.com/fagga/transmission-remote-cli
+# DESC: ncurses frontend to transmission-daemon
+tsm-ncurse() { transmission-remote-cli ;}
+
+# }}}
+#-------- Alias Custom {{{
+#------------------------------------------------------
+ #alias sudo='sudo -i'
+ #alias sudo='sudo '					# make aliases work with sudo
+ #alias ps="ps aux | grep -v grep | grep "
+ alias ff="find . |grep "
+ #alias pp="ps aux |grep "
+ #alias oo="xdg-open "
+ #alias emacs="emacs -nw"
+
+#alias xclipin='xclip -sel c -in <'
+#alias xclipout='xclip -sel c -out >'
+#alias psg='ps aux|grep -v grep|grep -i '
+psgrep() { ps axuf | grep -v grep | grep "$@" -i --color=auto; }
+alias lsd='ls -1d */'					# ls folders only
+alias l='ls -l'
+#alias lsf='ls --color=always -p | grep -v '/$''		# ls files only
+alias lsa='ls -ghA'
+#alias lsx='ls -lX'
+# alias lst='ls -Ggthrc'				# ls by time/changes, newest at bottom
+#mplayer playlist
+#mplist() { mplayer -playlist <(tree -aif "$1" | awk '/\.(mp3|wav|ogg|avi|mpg|iso)$/'); }
+#mplist(){ mplayer -playlist <(find "$1" -regex '.*\.\(mp3\|wav\|ogg\|avi\|mpg\|iso\)' | sort); }
+
