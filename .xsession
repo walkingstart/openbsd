@@ -18,7 +18,7 @@ xset +fp ~/.fonts
 for font in /usr/local/share/fonts/*; do
         xset +fp "${font}"
         done
-        xset fp rehash
+xset fp rehash
 
 # load Xresources file
 xrdb -merge $HOME/.Xresources

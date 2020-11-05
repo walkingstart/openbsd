@@ -102,7 +102,7 @@ bind-key 4-s window-stick
 # mod + F = make current window fullscreen
 #bind-key 4-f window-maximize
 # mod + M = maximize current window
-bind-key 4-f window-fullscreen
+bind-key 4-f window-maximize
 # mod + equals = maximize window in vertical direction only
 bind-key 4-equal window-vmaximize
 # mod + shift + equals = maximize window in horizontal direction only
