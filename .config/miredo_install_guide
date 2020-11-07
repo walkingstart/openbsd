@@ -1,0 +1,25 @@
+$ doas pkg_add autoconf automake gettext-runtime gmake libJudy libtool
+$ git clone https://git.remlab.net/git/miredo.git
+$ cd miredo
+$ sed -i '29d' libteredo/packets.c
+$ sed -i '29d' libteredo/relay.c
+$ sed -i '29d' libteredo/maintain.c
+$ sed -i 's,ifdef IP_MULTICAST_IF,if 0,g' libteredo/discovery.c
+$ sed -i '59 a \
+> extern char **environ;' src/privproc.c
+$ sed -i '27d' src/relayd.c
+$ sed -i '65 a \
+> extern char **environ;' src/relayd.c
+$ sed -i '26d' libtun6/tun6.c
+$ sed -i '29d' src/miredo.c
+$ sed -i '26d' src/conf.c
+$ sed -i '27d' src/main.c
+$ sed -i 's,gettext_noop,gettext,g' compat/fixups.h
+$ sed -i '26d' src/serverd.c
+$ sed -i '26d' libteredo/server.c
+$ sed -i '26d' src/checkconf.c
+$ AUTOCONF_VERSION=2.69 AUTOMAKE_VERSION=1.16 autoreconf -fiv
+$ CC=cc CXX=c++ CPPFLAGS='-I/usr/local/include' LDFLAGS='-L/usr/local/lib -lintl' ./configure
+$ sed -i 's,include/gettext.h,,g' Makefile
+$ gmake V=1
+$ doas gmake install
