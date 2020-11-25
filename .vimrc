@@ -88,7 +88,7 @@ set ruler
 set cmdheight=2
 
 set number
-set relativenumber
+"set relativenumber
 " A buffer becomes hidden when it is abandoned
 set hid
 
@@ -175,7 +175,7 @@ set ffs=unix,dos,mac
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 "set enc=utf8
 set fencs=utf8,gbk,gb2312,gb18030
-
+set clipboard=unnamed
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

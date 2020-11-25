@@ -29,7 +29,7 @@ cfg-aliasrc() { $EDITOR ~/.aliasrc ;}
 cfg-cwm() { $EDITOR ~/.cwmrc ;}
 #cfg-abookrc() { $EDITOR ~/.abook/abookrc ;}
 #cfg-addressbook() { $EDITOR ~/.abook/addressbook ;}
-fg-kshrc() { $EDITOR ~/.kshrc ;}
+cfg-kshrc() { $EDITOR ~/.kshrc ;}
 #cfg-blocklist() { $EDITOR ~/.scripts/blocklist.sh ;}
 #cfg-clonezilla() { sudo $EDITOR /etc/drbl/drbl.conf ;}
 # https://wiki.archlinux.org/index.php/Cursor_Themes#Choosing_and_Configuring_Cursor_Themes
@@ -45,7 +45,7 @@ fg-kshrc() { $EDITOR ~/.kshrc ;}
 #cfg-group() { sudo $EDITOR /etc/group ;}
 #cfg-grub() { sudo $EDITOR /etc/default/grub ;}
 #cfg-hintrc() { $EDITOR ~/.hintrc ;}
-cfg-hosts() { sudo $EDITOR /etc/hosts ;}
+cfg-hosts() { doas $EDITOR /etc/hosts ;}
 #cfg-i3wm() { $EDITOR ~/.i3/config ;}
 #cfg-inputrc() { $EDITOR ~/.inputrc ;}
 #cfg-kodi-keyboard() { $EDITOR ~/.kodi/userdata/keymaps/keyboard.xml ;}
@@ -123,8 +123,8 @@ rld-font() { fc-cache -v -f ;}
 #rld-xmodmap() { xmodmap ~/.Xmodmap ;}
 rld-xresources() { xrdb -load ~/.Xresources ;}
 #rld-zshrc() { source ~/.zshrc ;}
-rld-kshrc() { source ~/.kshrc ;}
-rld-cwmrc() { source ~/.cwmrc ;}
+#rld-kshrc() { source ~/.kshrc ;}
+#rld-cwmrc() { source ~/.cwmrc ;}
 # }}}
 #-------- Alias (Substitution) {{{
 #------------------------------------------------------
@@ -146,6 +146,7 @@ alias ls="colorls -GF"
  alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 #
  alias c="clear"
+ youtube() { youtube-dl -f best --proxy http://127.0.0.1:1080 "$1" ;} 
 # alias reload=". $HOME/.kshrc"
 # alias usr1="pkill -USR1"
 #

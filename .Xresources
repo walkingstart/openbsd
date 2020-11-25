@@ -3,10 +3,21 @@ Xft.autohint : 0
 Xft.lcdfilter : lcddefault
 Xft.rgba :       rgb
 Xft.hintstyle :  hintslight
-Xft.dpi :        120
+Xft.dpi :        110
 Xft.antialias :  1
 Xft.hinting : 1
 
+! ~/scripts/termbar inside xterm(1) 
+!termbar*faceName: CodeNewRoman Nerd Font:style=Bold:size=13 
+!termbar*geometry: 191x1+0+0 
+!termbar*internalBorder: 6 
+!termbar*saveLines: 0 
+!termbar*scrollBar: false 
+!termbar*title: termbar 
+!termbar*foreground: qogir_white 
+!termbar*background: qogir_black 
+!termbar*color1: qogir_red 
+!termbar*color3: qogir_orange
 !!! ===== xidle
 !! ! drag pointer to lower left corner to lock screen
 xidle*position : sw
@@ -16,48 +27,6 @@ xidle*delay    : 1
 !xidle*timeout  : 600
 XIdle.timeout: 300
 
-xcalc*geometry:				200x275
-xcalc.ti.bevel.background:		#111111
-xcalc.ti.bevel.screen.background:	#000000
-xcalc.ti.bevel.screen.DEG.background:	#000000
-xcalc.ti.bevel.screen.DEG.foreground:	LightSeaGreen
-xcalc.ti.bevel.screen.GRAD.background:	#000000
-xcalc.ti.bevel.screen.GRAD.foreground:	LightSeaGreen
-xcalc.ti.bevel.screen.RAD.background:	#000000
-xcalc.ti.bevel.screen.RAD.foreground:	LightSeaGreen
-xcalc.ti.bevel.screen.INV.background:	#000000
-xcalc.ti.bevel.screen.INV.foreground:	Red
-xcalc.ti.bevel.screen.LCD.background:	#000000
-xcalc.ti.bevel.screen.LCD.foreground:	LightSeaGreen
-xcalc.ti.bevel.screen.LCD.shadowWidth:	0
-xcalc.ti.bevel.screen.M.background:	#000000
-xcalc.ti.bevel.screen.M.foreground:	LightSeaGreen
-xcalc.ti.bevel.screen.P.background:	#000000
-xcalc.ti.bevel.screen.P.foreground:	Yellow
-xcalc.ti.Command.foreground:		White
-xcalc.ti.Command.background:		#777777
-xcalc.ti.button5.background:		Orange3
-xcalc.ti.button19.background:		#611161
-xcalc.ti.button18.background:		#611161
-xcalc.ti.button20.background:		#611111
-xcalc.ti.button25.background:		#722222
-xcalc.ti.button30.background:		#833333
-xcalc.ti.button35.background:		#944444
-xcalc.ti.button40.background:		#a55555
-xcalc.ti.button22.background:		#222262
-xcalc.ti.button23.background:		#222262
-xcalc.ti.button24.background:		#222272
-xcalc.ti.button27.background:		#333373
-xcalc.ti.button28.background:		#333373
-xcalc.ti.button29.background:		#333373
-xcalc.ti.button32.background:		#444484
-xcalc.ti.button33.background:		#444484
-xcalc.ti.button34.background:		#444484
-xcalc.ti.button37.background:		#555595
-xcalc.ti.button38.background:		#555595
-xcalc.ti.button39.background:		#555595
-XCalc*Cursor:				hand2
-XCalc*ShapeStyle:			rectangle
 ! ! ===== xlock
 ! ! actually turn the backlight off
 XLock.dpmsoff     : 1
@@ -67,28 +36,16 @@ xlock.echokeys    : off
 xlock.info        :
 xlock.background  : black
 xlock.foreground  : white
-XLock.mode: random
+XLock.mode: matrix
 XLock.mousemotion: on
 XLock.nice: 19
 XLock.program: /usr/games/fortune -a
-XLock.random.modelist: maze bat biof pyro drift eyes lisa marquee matrix molecule nose pacman petri space swarm tetris worm xcl
+!XLock.random.modelist: maze bat biof pyro drift eyes lisa marquee matrix molecule nose pacman petri space swarm tetris worm xcl
 xlock.username    : username: 
 xlock.password    : password: 
 xlock.font        : -misc-fixed-medium-r-normal-*-15-*-*-*-*-*-iso10646-1
 xlock.planfont    : -misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
 
-! ===== xclock
-! digital clock in lower right-hand corner
-!XClock*analog      : false
-!XClock*twentyfour  : true
-!XClock*padding     : 1
-!XClock*geometry    : -4-4
-!XClock*render      : false
-!XClock*font        : -misc-fixed-bold-r-normal-*-13-*-*-*-*-*-iso10646-1
-!XClock*height      : 12
-!XClock*background  : dimgray
-!XClock*foreground  : white
-!XClock*borderWidth : 0
 ! ===== xclock
 ! digital clock in lower right-hand corner
 XClock*analog      : false
@@ -109,8 +66,10 @@ xman*manualFontItalic        : -adobe-times-medium-i-normal--24-240-100-100-p-12
 !XTerm*boldFont: -*-*-*-*-*-*-*-100-*-*-*-60-iso10646-*
 XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
 !!! Foreground
-XTerm*foreground:       #d3d3d3
-XTerm*background:       #000000
+!XTerm*foreground:       #d3d3d3
+!XTerm*background:       #000000
+XTerm*background: black
+XTerm*foreground: rgb:9f/a2/a6
 XTerm*cursorColor:  #ff0000
 
 XTerm*underlineColor : #dfaf8f
@@ -130,31 +89,6 @@ XTerm*color12        : #8cd0d3
 XTerm*color13        : #dc8cc3
 XTerm*color14        : #93e0e3
 XTerm*color15        : #ffffff
-!!!Blacks
-!XTerm*color0:           #151515
-!XTerm*color8:           #505450
-!!!Reds
-!XTerm*color1:           #a60101
-!XTerm*color9:           #f99090
-!!!Greens
-!XTerm*color2:           #026802
-!XTerm*color10:          #a7e14b
-!!!Yellows
-!XTerm*color3:           #ab6e03
-!XTerm*color11:          #fddc01
-!!!Blues
-!XTerm*color4:           #4a5463
-!XTerm*color12:          #7d8794
-!!!Purples
-!XTerm*color5:           #9c3885
-!XTerm*color13:          #e628ba
-!!!Cyans
-!XTerm*color6:           #08bab0
-!XTerm*color14:          #74fff7
-!!!Whites
-!XTerm*color7:           #bbbbbb
-!XTerm*color15:          #ffffff
-
 
 
 XTerm*termName               : xterm-256color
@@ -250,6 +184,10 @@ XTerm*VT100*Translations     : #override Shift : exec-formatted("chrome --enable
 
 !*.foreground:   nord4
 !*.background:   nord0
+
+!!! special
+*.foreground: #93a1a1
+*.background: #141c21
 *.cursorColor:  nord6
 *fading: 25
 !*fadeColor: nord4
@@ -286,78 +224,7 @@ XTerm*VT100*Translations     : #override Shift : exec-formatted("chrome --enable
 *.color15:      #efefef
 !
 !
-!
-!URxvt.intensityStyles:	false
-!URxvt.background:       [70]#000000
-!URxvt.depth:		32
-!URxvt.font: 		xft:inconsolata:size=16
-!!URxvt.letterSpace: -1
-!URxvt.scrollBar:	false
-!URxvt.cursorColor:	red
-!
-!!! Extensions
-!URxvt.perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select,clipboard
-!URxvt.colorUL:		#4682B4
-!!! url-select
-!URxvt.keysym.M-u:	perl:url-select:select_next
-!URxvt.perl-lib: /home/zero/.urxvt/
-!URxvt.url-select.launcher: firefox
-!URxvt.url-select.underline: true
-!!! keyboard-select:
-!URxvt.keysym.M-Escape: perl:keyboard-select:activate
-!!! resize-font
-!URxvt.resize-font.smaller:	C-Down
-!URxvt.resize-font.bigger:	C-Up
-!!! Matcher
-!URxvt.url-launcher:	firefox
-!URxvt.matcher.button:	1
-!!!clipboard
-!URxvt.deysym.M-c: perl:clipboard:copy
-!URxvt.deysym.M-v: perl:keyboard:paste
-!! Colorscheme
-!
-!!! special
-*.foreground: #93a1a1
-*.background: #141c21
-!*.cursorColor: #afbfbf
-!
-!! black
-!*.color0: #263640
-!*.color8: #4a697d
-!
-!! red
-!*.color1: #d12f2c
-!*.color9: #fa3935
-!
-!! green
-!*.color2: #819400
-!*.color10: #a4bd00
-!
-!! yellow
-!*.color3: #b08500
-!*.color11: #d9a400
-!
-!! blue
-!*.color4: #2587cc
-!*.color12: #2ca2f5
-!
-!! magenta
-!*.color5: #696ebf
-!*.color13: #8086e8
-!
-!! cyan
-!*.color6: #289c93
-!*.color14: #33c5ba
-!
-!! white
-!*.color7: #bfbaac
-!*.color15: #fdf6e3
-
 !! URxvt Appearance
-!URxvt.font: -*-rissole-*
-!URxvt.boldFont: -*-rissole-*
-!URxvt.italicFont: -*-rissole-*
-!URxvt.boldItalicfont: -*-rissole-*
 URxvt.letterSpace: 0
 URxvt.lineSpace: 1
 URxvt.geometry: 92x24
@@ -371,7 +238,7 @@ URxvt.urgentOnBell: true
 URxvt.depth: 24
 URxvt.iso14755: false
 
-URxvt.font: 		xft:inconsolata:size=14
+URxvt.font: 		xft:Hack:size=14
 URxvt.cursorColor:	red
 
 

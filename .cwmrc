@@ -2,6 +2,7 @@
 sticky yes
 # snap windows to edges at 4 pixels distance
 snapdist 10
+ignore termbar
 # leave a gap for xclock
 gap 10 10 10 10
 
