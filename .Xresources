@@ -237,6 +237,7 @@ URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.depth: 24
 URxvt.iso14755: false
+URxvt*termName: rxvt-256color
 
 URxvt.font: 		xft:Hack:size=14
 URxvt.cursorColor:	red
