@@ -8,16 +8,16 @@ Xft.antialias :  1
 Xft.hinting : 1
 
 ! ~/scripts/termbar inside xterm(1) 
-!termbar*faceName: CodeNewRoman Nerd Font:style=Bold:size=13 
+!termbar*faceName: CodeNewRoman Nerd Font:size=14 
 !termbar*geometry: 191x1+0+0 
 !termbar*internalBorder: 6 
 !termbar*saveLines: 0 
 !termbar*scrollBar: false 
 !termbar*title: termbar 
-!termbar*foreground: qogir_white 
-!termbar*background: qogir_black 
-!termbar*color1: qogir_red 
-!termbar*color3: qogir_orange
+!termbar*foreground: white 
+!termbar*background: black 
+!termbar*color1: red 
+!termbar*color3: orange
 !!! ===== xidle
 !! ! drag pointer to lower left corner to lock screen
 xidle*position : sw
@@ -236,7 +236,7 @@ URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.depth: 24
-URxvt.iso14755: false
+!URxvt.iso14755: false
 URxvt*termName: rxvt-256color
 
 URxvt.font: 		xft:Hack:size=14
@@ -261,7 +261,7 @@ URxvt.perl-lib: /home/zero/.urxvt/ext
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 URxvt.keysym.M-c: perl:clipboard:copy
-!URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-v: perl:clipboard:paste
 URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search

@@ -1,3 +1,4 @@
+#!/bin/ksh
 # use UTF-8 everywhere
 export LANG=en_US.UTF-8
 export LC_CTYPE=zh_CN.UTF-8
@@ -19,6 +20,7 @@ export ENABLE_WASM=1
 # suppress blue light at night
 redshift -l 40.2732:-76.8867 -g 0.9 &
 
+xset -b &
 xset +fp ~/.fonts
 for font in /usr/local/share/fonts/*; do
         xset +fp "${font}"
@@ -55,4 +57,10 @@ compton &
 fcitx &
 
 # start cwm!
+#exec cwm
+exec xterm -geometry 1920x1+0+0 -fa "CodeNewRoman Nerd Font:size=14" -fs 12 -bg "black" -fg "grey" -name termbar -class termbar -T termbar -e /home/zero/termbar &
+
+#xterm -name termbar -class termbar -e /home/zero/termbar &
+
+#xterm -name termbar -class termbar -e /home/zero/myown/termbar &
 exec cwm
