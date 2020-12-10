@@ -48,13 +48,13 @@ xlock.planfont    : -misc-fixed-medium-r-normal-*-13-*-*-*-*-*-iso10646-1
 
 ! ===== xclock
 ! digital clock in lower right-hand corner
-XClock*analog      : false
-XClock*twentyfour  : true
-XClock*padding     : 1
-XClock*font        : -misc-spleen-medium-r-normal--24-240-72-72-c-120-iso10646-1
-XClock*background  : #16161d
-XClock*foreground  : nord5
-XClock*borderWidth : 1
+!XClock*analog      : false
+!XClock*twentyfour  : true
+!XClock*padding     : 1
+!XClock*font        : -misc-spleen-medium-r-normal--24-240-72-72-c-120-iso10646-1
+!XClock*background  : #16161d
+!XClock*foreground  : nord5
+!XClock*borderWidth : 1
 
 
 ! ===== XMan settings

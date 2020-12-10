@@ -38,9 +38,9 @@ xidle -timeout 300 &
 
 # sadly, xclock has a bug where the font selection is ignored when UTF-8
 # is enabled, so we unset LANG here.
-USER=$(whoami)
-HOST=$(hostname -s)
-LANG= xclock -strftime "$USER@$HOST | %m/%d/%Y %H:%M" -geometry -10-10 -render -face "Noto Mono:pixelsize=24" &
+#USER=$(whoami)
+#HOST=$(hostname -s)
+#LANG= xclock -strftime "$USER@$HOST | %m/%d/%Y %H:%M" -geometry -10-10 -render -face "Noto Mono:pixelsize=24" &
 
 # disable system beep
 export GTK_IM_MODULE=fcitx
@@ -58,7 +58,7 @@ fcitx &
 
 # start cwm!
 #exec cwm
-exec xterm -geometry 1920x1+0+0 -fa "CodeNewRoman Nerd Font:size=14" -fs 12 -bg "black" -fg "grey" -name termbar -class termbar -T termbar -e /home/zero/termbar &
+exec xterm -geometry 1920x1+0+0 -fa "CodeNewRoman Nerd Font:size=12" -fs 12 -bg "black" -fg "grey" -name termbar -class termbar -T termbar -e /home/zero/scripts/termbar &
 
 #xterm -name termbar -class termbar -e /home/zero/termbar &
 

@@ -1,5 +1,0 @@
-#!/bin/sh
-# rcctl set sndiod flags -s default -m play,mon -s mon
-# rcctl restart sndiod
-# sysctl kern.audio.record=1
-ffmpeg -f sndio -i snd/0.mon -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0 -c:v libx264 -qp 0 -preset ultrafast output.mkv
