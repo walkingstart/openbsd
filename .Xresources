@@ -254,21 +254,22 @@ URxvt.keysym.Control-Right: \033[1;5C
 URxvt.keysym.Control-Left: \033[1;5D
 
 !! Copy Paste & Other Extensions
+URxvt.perl-lib: /home/zero/.urxvt/
 URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
-URxvt.keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.iso14755: False
-URxvt.perl-lib: /home/zero/.urxvt/ext
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+!URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+!URxvt.iso14755: False
 URxvt.copyCommand: xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.urlLauncher: firefox
 URxvt.underlineURLs: true
 URxvt.urlButton: 1
+URxvt.keyboard-select.clipboard:true
 
 
 !#################################
