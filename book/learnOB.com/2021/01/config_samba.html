@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>learnOB</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav>
+	<a href="/index.html">Home</a> |
+	<a href="/about.html">About</a> |
+	<a href="mailto:o@olowe.co">Contact</a>
+</nav>
+<hr />
+<article>
+<h1 id="Samba%20Config">Samba Config</h1>
+
+<p>28 January 2021</p>
+
+<p>&#47;etc&#47;samba&#47;smb.conf  example:</p>
+
+<p>[global]</p>
+
+<p>workgroup = WORKGROUP</p>
+
+<p>netbios name = File Server</p>
+
+<p>server string = OpenBSD Samba Server</p>
+
+<p>max log size = 100</p>
+
+<p>local master = yes</p>
+
+<p>os level = 100</p>
+
+<p>invalid users = nobody root</p>
+
+<p>load printers = no</p>
+
+<p>max connections = 10</p>
+
+<p>preferred master = yes</p>
+
+<p>preserve case = no</p>
+
+<p>disable netbios = yes</p>
+
+<p>dns proxy = no</p>
+
+<p>domain master = yes</p>
+
+<p>default case = lower</p>
+
+<p>encrypt passwords = yes</p>
+
+<p>security = user</p>
+
+<p>hosts allow = 172.16.0.0&#47;24 127.0.0.1 # allow your network to access</p>
+
+<p>hosts deny = all</p>
+
+<p>bind interfaces only = yes</p>
+
+<p>interfaces = jme0 # add the correct interface</p>
+
+<p>guest ok = yes</p>
+
+<p>guest only = yes</p>
+
+<p>socket options = TCP<em>NODELAY IPTOS</em>LOWDELAY SO<em>RCVBUF=65536 SO</em>SNDBUF=65536</p>
+
+<p>strict sync = no</p>
+
+<p>sync always = no</p>
+
+<p>syslog = 1</p>
+
+<p>syslog only = yes</p>
+
+<p>[Files]</p>
+
+<p>comment = files</p>
+
+<p>create mask = 644</p>
+
+<p>path = &#47;home&#47;iglesias&#47;network # change to the directory you want</p>
+
+<p>writeable = yes</p>
+
+<p>valid users = iglesias # change to user you want to give access</p>
+
+<p>read only = no</p>
+
+<p>browseable = yes</p>
+
+<p>smbpasswd -a iglesias # username</p>
+
+<p>Restarting the service:</p>
+
+<p>&#47;etc&#47;rc.d&#47;samba restart</p>
+
+<p>nano &#47;etc&#47;rc.local</p>
+
+<p>Add in the last line:</p>
+
+<p>&#47;etc&#47;rc.d&#47;samba start</p>
+
+<p>And now we are ready!</p>
+</article>
+<i>Copyright 2021-2030 Renjian Hu . All rights reserved.</i>
+</body>
+</html>

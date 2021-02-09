@@ -1,0 +1,151 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>learnOB</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav>
+	<a href="/index.html">Home</a> |
+	<a href="/about.html">About</a> |
+	<a href="mailto:o@olowe.co">Contact</a>
+</nav>
+<hr />
+<article>
+<h1 id="Softwareraid">Softwareraid</h1>
+
+<p>26 January 2021</p>
+
+<p>As with RAIDframe, booting and kernel loading are performed from a hard drive partition outside of the RAID array. But unlike RAIDframe, you don&#39;t install bootblocks on your non-RAID hard drives individually. Instead, installboot(8) is run once, using the softraid volume, and the first stage bootloader will be installed on the applicable drives, as sys&#47;dev&#47;softraid.c now tracks when installboot is run against a softraid volume, and magic happens:</p>
+
+<pre><code> # &#47;usr&#47;mdec&#47;installboot -v &#47;boot &#47;usr&#47;mdec&#47;biosboot sd0 
+
+boot: &#47;boot proto: &#47;usr&#47;mdec&#47;biosboot device: &#47;dev&#47;rsd0c
+
+sd0: softraid volume with 2 disk(s)
+
+sd0: installing boot loader on softraid volume
+
+&#47;boot is 3 blocks x 16384 bytes
+
+wd0d: installing boot blocks on &#47;dev&#47;rwd0c, part offset 209744
+
+master boot record (MBR) at sector 0
+
+partition 3: type 0xA6 offset 64 size 4193216
+
+&#47;boot will be written at sector 64
+
+wd1d: installing boot blocks on &#47;dev&#47;rwd1c, part offset 209744
+
+master boot record (MBR) at sector 0
+
+partition 3: type 0xA6 offset 64 size 4193216
+
+&#47;boot will be written at sector 64
+</code></pre>
+
+<p>For conversion to softraid from RAIDframe, I used my pre-existing RAID partitions on the hard drives. I backed up the array, booted the RAMDISK kernel, zeroed the first 100 sectors of each RAID partition with dd(1), created the softraid array with bioctl, and restored. The server&#39;s non-RAID &#8220;a&#8221; partitions have kernels in them, but no longer need a copy of the second stage bootloader program.</p>
+
+<p>Bare-metal installs are similar. Start by booting bsd.rd, and then prepare your drives with two partitions. A small &#8220;a&#8221; partition to hold kernels, and a second partition with fstype RAID for use in the array. Then, create the array, and install onto it. Here is an example with two 2GB disks used in a RAID-1 array, with 100MB &#8220;a&#8221; partitions to hold kernels:</p>
+
+<pre><code>   Welcome to the OpenBSD&#47;i386 5.0 installation program.
+
+    (I)nstall, (U)pgrade or (S)hell? s
+
+#cd &#47;dev
+
+#sh MAKEDEV wd1
+
+fdisk -iy wd0
+
+   Writing MBR at offset 0.
+
+#fdisk -iy wd1
+
+   Writing MBR at offset 0.
+
+#disklabel -E wd0
+
+    Label editor (enter &#39;?&#39; for help at any prompt)
+
+    &#62; a a
+
+    offset: [64]
+
+    size: [4193216] 100m
+
+    Rounding to cylinder: 209600
+
+    FS type: [4.2BSD]
+
+    &#62; a d
+
+    offset: [209664]
+
+    size: [3983616]
+
+    FS type: [4.2BSD] raid
+
+    &#62; q
+
+    Write new label?: [y]
+
+#disklabel wd0 &#62; protofile
+
+#disklabel -R wd1 protofile
+
+#bioctl -c 1 -l wd0d,wd1d softraid0
+
+    sd0 at scsibus0 targ 1 lun 0:  SCSI2 0&#47;direct fixed
+
+    sd0: 1944MB, 512 bytes&#47;sector, 3983088 sectors#^D
+
+    erase ^?, werase ^W, kill ^U, intr ^C, status ^T
+
+    Welcome to the OpenBSD&#47;i386 5.0 installation program.
+
+    (I)nstall, (U)pgrade or (S)hell? i`
+</code></pre>
+
+<p>Before booting, don&#39;t forget to format the two &#8220;a&#8221; partitions and copy kernels onto them. This can be done before or after you run the installation script. Afterwards might be easier if you did a network install, since the kernels will be local to you now on &#47;mnt&#47;:</p>
+
+<pre><code>#newfs wd0a
+</code></pre>
+
+<p>newfs: reduced number of fragments per cylinder group from 13096 to 13040 to enlarge last cylinder group</p>
+
+<p>&#47;dev&#47;rwd0a: 102.3MB in 209600 sectors of 512 bytes</p>
+
+<p>5 cylinder groups of 25.47MB, 1630 blocks, 3328 inodes each</p>
+
+<p>super-block backups (for fsck -b #) at: 32, 52192, 104352, 156512, 208672,</p>
+
+<pre><code>#newfs wd1a
+</code></pre>
+
+<p>newfs: reduced number of fragments per cylinder group from 13096 to 13040 to enlarge last cylinder group</p>
+
+<p>&#47;dev&#47;rwd1a: 102.3MB in 209600 sectors of 512 bytes</p>
+
+<p>5 cylinder groups of 25.47MB, 1630 blocks, 3328 inodes each super-block backups (for fsck -b #) at:32, 52192, 104352, 156512, 208672,</p>
+
+<pre><code>#mount &#47;dev&#47;wd0a &#47;mnt2
+
+#cp &#47;mnt&#47;bsd* &#47;mnt2
+
+#umount &#47;mnt2
+
+#mount &#47;dev&#47;wd1a &#47;mnt2
+
+#cp &#47;mnt&#47;bsd* &#47;mnt2
+
+#umount &#47;mnt2
+</code></pre>
+
+<p>Reboot, and you&#39;re running off a softraid(4) root file system. </p>
+</article>
+<i>Copyright 2021-2030 Renjian Hu . All rights reserved.</i>
+</body>
+</html>

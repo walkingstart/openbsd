@@ -1,0 +1,226 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>learnOB</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav>
+	<a href="/index.html">Home</a> |
+	<a href="/about.html">About</a> |
+	<a href="mailto:o@olowe.co">Contact</a>
+</nav>
+<hr />
+<article>
+<h1 id="Pf-badhost">Pf-badhost</h1>
+
+<p>28 January 2021</p>
+
+<p>Installation guide on OpenBSD, in 10 simple steps</p>
+
+<p>Create a new user on your system, &#8216;_pfbadhost&#8217; as example.</p>
+
+<p>The user should be created with default shell of nologin, home folder set to &#47;var&#47;empty&#47; with no password specified (logins disabled).</p>
+
+<p>\begin{tcolorbox}</p>
+
+<p>useradd -s &#47;sbin&#47;nologin -d &#47;var&#47;empty _pfbadhost</p>
+
+<p>Download pf-badhost:</p>
+
+<p># ftp <a href="https://geoghegan.ca/pub/pf-badhost/0.5/pf-badhost.sh">https:&#47;&#47;geoghegan.ca&#47;pub&#47;pf-badhost&#47;0.5&#47;pf-badhost.sh</a></p>
+
+<p>Install script with appropriate permissions:</p>
+
+<p># install -m 755 -o root -g bin pf-badhost.sh &#47;usr&#47;local&#47;bin&#47;pf-badhost</p>
+
+<p>Create required files:</p>
+
+<p># install -m 640 -o _pfbadhost -g wheel &#47;dev&#47;null &#47;etc&#47;pf-badhost.txt</p>
+
+<p># install -d -m 755 -o root -g wheel &#47;var&#47;log&#47;pf-badhost</p>
+
+<p># install -m 640 -o _pfbadhost -g wheel &#47;dev&#47;null &#47;var&#47;log&#47;pf-badhost&#47;pf-badhost.log</p>
+
+<p># install -m 640 -o _pfbadhost -g wheel &#47;dev&#47;null &#47;var&#47;log&#47;pf-badhost&#47;pf-badhost.log.0.gz</p>
+
+<p>Give user &#8216;_pfbadhost&#8217; strict doas permission for the exact commands the script needs run as superuser.</p>
+
+<p>NOTE: Unlike &#8216;sudo&#8217;, <em>ALL</em> users must be explicitly granted permission to use doas, even the root user. (Create &#47;etc&#47;doas.conf if doesn&#39;t exist)</p>
+
+<p># cat &#47;etc&#47;doas.conf</p>
+
+<p>permit root</p>
+
+<p>permit nopass _pfbadhost cmd &#47;sbin&#47;pfctl args -nf &#47;etc&#47;pf.conf</p>
+
+<p>permit nopass _pfbadhost cmd &#47;sbin&#47;pfctl args -t pfbadhost -T replace -f &#47;etc&#47;pf-badhost.txt</p>
+
+<p># Optional rule for authlog scanning</p>
+
+<p>permit nopass _pfbadhost cmd &#47;usr&#47;bin&#47;zcat args -f &#47;var&#47;log&#47;authlog &#47;var&#47;log&#47;authlog.0.gz</p>
+
+<p>Add the following lines to your PF&#39;s configuration file located usually in &#47;etc&#47;pf.conf: (Putting it higher-up&#47;earlier in the ruleset is recommended)</p>
+
+<p>…
+  table  persist file &#8220;&#47;etc&#47;pf-badhost.txt&#8221;</p>
+
+<p>block in quick on egress from </p>
+
+<p>block out quick on egress to 
+  …</p>
+
+<p>The lines above in pf.conf do the following things;</p>
+
+<p>Create a table titled &#8220;pfbadhost&#8221;</p>
+
+<p>Link the table to the contents (IP addresses) in &#47;etc&#47;pf-badhosts.txt</p>
+
+<p>Block both incoming&#47;outgoing traffics coming from those IPs to your server, through egress (&#8216;egress&#8217; contains the interface(s) that holds the default route(s))</p>
+
+<p>Run the pfbadhost.sh script as user &#8220;_pfbadhost&#8221; using the &#8220;-O openbsd&#8221; argument:</p>
+
+<p># doas -u _pfbadhost pf-badhost -O openbsd</p>
+
+<p>Reload your pf rule set:</p>
+
+<p># pfctl -f &#47;etc&#47;pf.conf</p>
+
+<p>For good measure, run the pf-badhost.sh script once more:</p>
+
+<p># doas -u _pfbadhost pf-badhost -O openbsd</p>
+
+<p>Edit _pfbadhost user&#39;s crontab to run pf-badhost.sh every night at midnight:</p>
+
+<p># crontab -u _pfbadhost -e
+  ~ 0~1 * * * -s pf-badhost -O openbsd</p>
+
+<p>Yay! pf-badhost is now installed! With the nightly cron job, the list will be regularly updated with the latest known bad hosts.</p>
+
+<p>Some useful PF commands to manage the PF’s table &#8220;pfbadhost&#8221;</p>
+
+<p>List the table contents (List of blocked IPs – get ready for a huge list):</p>
+
+<p>pfctl -t pfbadhost -T show</p>
+
+<p>Manually add IPs into the table pfbadhost:</p>
+
+<p>pfctl -t pfbadhost -T add 192.16.42.52</p>
+
+<p>pfctl -t pfbadhost -T add 195.11.0.0&#47;16</p>
+
+<p>Delete IPs:</p>
+
+<p>pfctl -t pfbadhost -T delete 192.168.0.0&#47;16</p>
+
+<p>Scan IPs inside the table (check if you block a specific IP address):</p>
+
+<p>pfctl -t pfbadhost -T test 192.16.42.52</p>
+
+<p>Overview of Features from Jordan Geoghegan</p>
+
+<p>Fetching Lists</p>
+
+<p>PF-badhost supports downloading lists in parallel and is able to reattempt failed downloads.</p>
+
+<p>By default PF-badhost will run up to 5 parallel fetch operations and will make an attempt to fetch each list up to 3 times before aborting.</p>
+
+<p>By default, PF-badhost runs in ‘strict’ mode, which means it will abort if it fails to fetch a list upon hitting the maximum specified retry limit.</p>
+
+<p>Parallel fetches, retries and strict mode can be configured within the &#8216;User Configuration Area&#8217; or on the command line with the ‘-P’, ‘-R’ and ‘-o’ options respectively. ‘-P’ and ‘-R’ require a positive integer as an argument – if set to 0, then parallelism or retries will be disabled. Strict mode can be enabled&#47;disabled with ‘-o strict’ or ‘-o no-strict’.</p>
+
+<p>Use Alternate Lists</p>
+
+<p>There are several ways to use alternate lists with PF-badhost</p>
+
+<p>Edit config in &#8216;User Configuration Area&#8217; at top of script</p>
+
+<p>Specify blocklist URL with ‘-l’ option</p>
+
+<p>Specify path to text file containing a list of one or more URLs with ‘-u’ option</p>
+
+<p>Lists may be fetched via a local path, an HTTP&#47;HTTPS URL or an FTP link.</p>
+
+<p>Multiple fetch utilities are supported, such as ‘curl’, ‘wget’, FreeBSD’s ‘fetch’ and OpenBSD’s ‘ftp’.</p>
+
+<p>Fetch utility preference may be specified with with the ‘-F’ option, otherwise a utility available from the base system is used.</p>
+
+<p>Any URL format may be used, as long as it is supported by your specified fetch utility. Fetched lists may optionally be gzip compressed.
+Export</p>
+
+<p>Generated blocklists can easily be exported for external use by using the ‘-x’ option. When ‘-x’ is specified, PF-badhost will print the generated list to stdout.
+IP Address Families</p>
+
+<p>IP address families can be configured within the &#8216;User Configuration Area&#8217; or from the command line using the ‘-4’, ‘-6’ and ‘-B’ options. ‘-4’ and ‘-6’ are used to generate IPv4-only and IPv6-only lists, and ‘-B’ can be used to generate a mixed list.
+Filter by ASN</p>
+
+<p>There are several ways to filter an ASN with PF-badhost:</p>
+
+<p>Edit config in &#8216;User Configuration Area&#8217; at top of script</p>
+
+<p>Specify single ASN to block with ‘-a’ option</p>
+
+<p>Specify path to text file containing a list of one or more ASN with ‘-j’ option</p>
+
+<p>PF-badhost can block networks and organizations by ASN (Autonomous System Number). It does this by taking 1 or more specified ASN and finding IP addresses and subnets associated with that ASN by querying the RADb ‘whois’ service. PF-badhost is able to efficiently perform very large queries against the RADb database as a dedicated socket is opened, allowing many queries to be made without the overhead of setting-up and tearing down a connection for each query. It is highly recommended to use subnet aggregation with ASN filtering, as RADb tends to return data in the form of a large number of individual &#47;24 subnets rather than more compact aggregated CIDR notation. If you’re also using IPv6, then the subnet aggregation recommendation becomes even more relevant.</p>
+
+<p>SSH Authlog Analysis &#47; Hail Mary Mitigation</p>
+
+<p>PF-badhost is able to analyze system SSH logs to identify and block brute-forcers. The brute-force failed login limit can be specified to allow the user to tune the blocking threshold to meet their needs.
+Subnet Aggregation</p>
+
+<p>If subnet aggregation is enabled (within the &#8216;User Configuration Area&#8217; or using the ‘-A’ switch), PF-badhost will opportunistically make use of the ‘aggregate’, ‘aggregate6’ or ‘aggy’ utilities if they are found within the users $PATH. If none of the supported aggregation utilities are found, then a pure Perl IPv4 aggregator will be used as a fallback option if Perl is installed.</p>
+
+<p>Subnet aggregation is useful as it can greatly reduce the number of items in the PF-badhost table, and thus reduce resource usage and improve performance. This becomes especially relevant on low powered devices. Subnet aggregation works by taking a list of IP addresses and CIDR blocks&#47;subnets and then parsing the data into the smallest possible representation using CIDR notation. It does this by looking for any overlapping ranges or adjacent subnets than can be merged. Subnet aggregation does have a bit of CPU overhead and processing time, but work is currently underway on an experimental aggregation utility written in Go that is approximately 100x faster than the current fastest solution.</p>
+
+<p>Geo-Blocking</p>
+
+<p>There are several ways to geo-block with PF-badhost:</p>
+
+<p>Enable option in &#8216;User Configuration Area&#8217; at top of script</p>
+
+<p>Specify ISO-3166 country code to block with ‘-g’ option</p>
+
+<p>PF-badhost supports geo-blocking any country by specifying its ISO-3166 two letter code. Country codes are case insensitive. Geo-blocking data is pulled from official Regional Internet Registry datasets.
+Tor Filtering</p>
+
+<p>PF-badhost is able to filter or whitelist Tor. Tor filtering can be configured within the &#8216;User Configuration Area&#8217; at the top of the script, or can be invoked with the ‘-T’ option.</p>
+
+<p>The ‘-T’ option requires an argument (case insensitive). Valid options are:</p>
+
+<p>&#8216;allow&#8217; – whitelist all Tor nodes</p>
+
+<p>&#8216;block&#8217; – block all Tor nodes</p>
+
+<p>&#8216;block_exit&#8217; – block all Tor exit nodes.</p>
+
+<p>Bogon Filtering</p>
+
+<p>PF-badhost is able to filter IPv4 and IPv6 bogons. Bogons are basically unassigned&#47;reserved&#47;private address ranges that should not be communicating on the public internet. IPv4 bogon filtering can be a little dicey as there is barely any unassigned IPv4 space remaining, but it can still have its uses. IPv6 bogon filtering however can make a lot of sense, as only 1&#47;8 of the IPv6 address space is being allocated, and the remaining 7&#47;8 is reserved for future use. This means that over 85% of the IPv6 address space can be safely blocked.</p>
+
+<p>Whitelisting</p>
+
+<p>There are several ways to whitelist addresses and specify custom rules with PF-badhost:</p>
+
+<p>Edit config in &#8216;User Configuration Area&#8217; at top of script</p>
+
+<p>Specify single custom PF table entry with ‘-r’ option</p>
+
+<p>Specify path to text file containing list of desired custom PF table entries with ‘-w’ option</p>
+
+<p>Many blocklists contain address ranges within the RFC 3330 and RFC 5156 address space. This can be quite the foot gun, as blocking this address space can have unintended and difficult to debug consequences. By default, PF-badhost now automatically whitelists RFC 3330 and 5156 address space to avoid such issues. If you know what you’re doing and don’t want that address space whitelisted, then you will need to remove the default whitelist entries from within the &#8216;User Configuration Area&#8217;.</p>
+
+<p>Logging</p>
+
+<p>PF-badhost logs it’s two most recently generated blocklists within ‘&#47;var&#47;log&#47;pf-badhost&#47;’ and error messages to stderr and ‘&#47;var&#47;log&#47;messages’.</p>
+
+<p>Logging to ‘&#47;var&#47;log&#47;pf-badhost&#47;’ can be enabled or disabled with the ‘-o log’ or ‘-o no-log’ options.</p>
+
+<p>Critical error messages will always be logged. Printing to stderr of info, warning and error messages may however be disabled with the ‘-V’ switch.</p>
+
+<p>If the mail system on your machine is configured, PF-badhost statistics and cron job results can be mailed to you. This is a feature of cron rather than a feature of PF-badhost, so you will have to check the documentation relevant to your system. The premise is simple: just forward all mail for user ‘_pfbadhost’ to your preferred email account.</p>
+</article>
+<i>Copyright 2021-2030 Renjian Hu . All rights reserved.</i>
+</body>
+</html>
