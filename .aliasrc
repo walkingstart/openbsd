@@ -1,13 +1,12 @@
 # set 256color support (doesnt work with older apps like abook)
 #export TERM="screen-256color"
-# export TERM="xterm-256color"
-
+ export TERM="xterm-256color"
 # find alternative apps if it is installed on your system
 find_alt() { for i;do which "$i" >/dev/null && { echo "$i"; return 0;};done;return 1; }
 
 # set the default program
 # the first program in the array that is detected on your system will be chosen as the default
-#export OPENER=$(find_alt xdg-open exo-open gnome-open )
+export OPENER=$(find_alt xdg-open exo-open gnome-open )
 export BROWSER=$(find_alt firefox chromium chromium-browser qutebrowser google-chrome  $OPENER )
 #export BROWSERCLI=$(find_alt w3m links2 links lynx elinks $OPENER )
 export COMICER=$(find_alt zathura mcomix comix $OPENER )
@@ -21,6 +20,7 @@ export PLAYER=$(find_alt mplayer mpv cvlc $OPENER )
 export READER=$(find_alt mupdf zathura $OPENER )
 #export ROOTER=$(find_alt gksudo kdesudo )
 export IMAGEVIEWER=$(find_alt gpicview feh $OPENER )
+export DISPLAY=:0
 
 # }}}
 #-------- Configurations {{{
@@ -136,17 +136,18 @@ rld-xresources() { xrdb -load ~/.Xresources ;}
 # alias ls="colorls -GF"
 # use colorls if it's installed, plain old ls otherwise
 alias ls="colorls -GF"
- alias ll='ls -lhA'
- alias l="ls"
- alias df="df -h"
- alias cp="cp -r"
- alias chown="chown -R"
- alias mkdir="mkdir -p"
- alias md="mkdir -p"
- alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
+alias ll='ls -lhA'
+alias l="ls"
+alias df="df -h"
+alias cp="cp -r"
+alias chown="chown -R"
+alias mkdir="mkdir -p"
+alias md="mkdir -p"
+alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 #
  alias c="clear"
- youtube() { youtube-dl -f best --proxy http://127.0.0.1:1080 "$1" ;} 
+youtube() { youtube-dl -f best --write-sub --sub-lang en --proxy http://127.0.0.1:1080 "$1" ;} 
+#youtube() { youtube-dl -f 'bestvideo[height<=?720]+bestaudio/best[height<=?720]' --proxy http://127.0.0.1:1080 "$1" ;} 
 # alias reload=". $HOME/.kshrc"
 # alias usr1="pkill -USR1"
 #
@@ -182,19 +183,19 @@ alias ls="colorls -GF"
 # alias dash="dash -l"
 #
 # # git
-# alias gc="git clone"
-# alias ga="git add"
-# alias grm="git rm"
-# alias gcm="git commit -m"
-# alias gp="git push"
-# alias gpom="git push origin master"
+ alias gc="git clone"
+ alias ga="git add"
+ alias grm="git rm"
+ alias gcm="git commit -m"
+ alias gp="git push"
+ alias gpom="git push origin master"
 # alias gpod="git push origin devel"
 #alias pka='sudo pkg_add -Iv'
 #alias pki='sudo pkg_info -Q'
 #alias pkd='sudo pkg_delete '
 #alias bc='bc -q -l'					# dont show opening msg, use math library
 #alias cal='cal -3'					# show 3 months
-#alias cp='cp -aiv'					# cp prompt confirmation
+alias cp='cp -aiv'					# cp prompt confirmation
 #alias df='df -h'				# human readable, print filetype, and total
 alias du='du  -ch'					# max depth, human readable
 #alias emacs='emacs -nw'					# cli mode

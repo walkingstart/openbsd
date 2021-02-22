@@ -25,7 +25,7 @@ xidle*position : sw
 xidle*delay    : 1
 !! also lock screen after 5 minutes idle
 !xidle*timeout  : 600
-XIdle.timeout: 300
+xidle.timeout: 3000
 
 ! ! ===== xlock
 ! ! actually turn the backlight off
@@ -93,22 +93,23 @@ XTerm*color15        : #ffffff
 
 XTerm*termName               : xterm-256color
 !XTerm.vt100.faceName: DejaVu Sans Mono:style=Book:antialias=false
-XTerm.vt100.faceName: xft:Hack
-XTerm.vt100.faceNameDoublesize: xft:WenQuanYi WenQuanYi Bitmap Song
-XTerm.vt100.faceSize: 16
+XTerm.vt100.faceName: CodeNewRoman Nerd Font:size=15
+!XTerm.vt100.faceNameDoublesize: xft:WenQuanYi WenQuanYi Bitmap Song
+XTerm.vt100.faceSize: 14
 
 XTerm*locale:           true
 XTerm*utf8Title:        true
 !XTerm*menuLocale:       zh_CN.UTF-8
-XTerm*faceName: xft: Bitstream Vera Sans Mono:pixelsize=16
+!XTerm*faceName: xft:CodeNewRoman Nerd:pixelsize=14
+!
 !XTerm*faceName: DejaVu Sans Mono:size=16
-XTerm*faceNameDoublesize: xft:Wenquanyi bitmap song:pixelsize=16
+!*XTerm*faceNameDoublesize: xft:Wenquanyi bitmap song:pixelsize=14
 XTerm*eightBitOutput:   true
 XTerm*eightBitInput:    true
 XTerm*eightBitSelectTypes: true
 XTerm*wideChars:        true
 XTerm*utf8:             1
-XTerm.faceSize: 16
+XTerm.faceSize: 14
 Xcursor.theme: dmz
 Xcursor.size: 32
 
@@ -143,39 +144,41 @@ XTerm*on2Clicks              : word
 ! select whole line on three clicks
 XTerm*on3Clicks              : line
 ! shift + left click to open selection in web browser
-XTerm*VT100*Translations     : #override Shift : exec-formatted("chrome --enable-unveil '%t'", PRIMARY)
+!XTerm*VT100*Translations     : #override Shift : exec-formatted("chrome --enable-unveil '%t'", PRIMARY)
 
-
+!*.font:	CodeNewRoman Nerd Font:pixelsize=20:antialias=true:autohint=true;
 !!!URxvt
 !*foreground: #00cc00
 !*foreground_bold: #a8a19f
 !*cursor: #a8a19f
 !*background: #1b1918
 !!!*background: rgba(0, 0, 0, .7)
-!!! black
+!! black
 !*color0: #1b1918
 !*color8: #766e6b
-!!! red
-!*color1: #f22c40
-!*color9: #f22c40
-!!! green
-!*color2: #5ab738
-!*color10: #5ab738
-!!! yellow
-!*color3: #d5911a
-!*color11: #d5911a
-!!! blue
-!*color4: #407ee7
-!*color12: #407ee7
-!!! magenta
-!*color5: #6666ea
-!*color13: #6666ea
-!!! cyan
-!*color6: #00ad9c
-!*color14: #00ad9c
-!!! white
-!*color7: #a8a19f
-!*color15: #f1efee
+*color0: #434343
+*color8: #1C1C1C
+!! red
+*color1: #f22c40
+*color9: #f22c40
+!! green
+*color2: #5ab738
+*color10: #5ab738
+!! yellow
+*color3: #d5911a
+*color11: #d5911a
+!! blue
+*color4: #407ee7
+*color12: #407ee7
+!! magenta
+*color5: #6666ea
+*color13: #6666ea
+!! cyan
+*color6: #00ad9c
+*color14: #00ad9c
+!! white
+*color7: #a8a19f
+*color15: #f1efee
 !
 !! special
 !*.foreground:   #ffffff
@@ -186,60 +189,63 @@ XTerm*VT100*Translations     : #override Shift : exec-formatted("chrome --enable
 !*.background:   nord0
 
 !!! special
-*.foreground: #93a1a1
-*.background: #141c21
-*.cursorColor:  nord6
-*fading: 25
+*.foreground: #4A593D 
+!*.foreground: #93a1a1
+*.background: #1C1C1C
+!*.background: #373C38
+!*.cursorColor:  nord6
+*fading: 20
 !*fadeColor: nord4
-! black
-*.color0:       #251f1f
-*.color8:       #5e5e5e
-
-! red
-*.color1:       #eb4509
-*.color9:       #eb4509
-
-! green
-*.color2:       #94e76b
-*.color10:      #95e76b
-
-! yellow
-*.color3:       #ffac18
-*.color11:      #ffac18
-
-! blue
-*.color4:       #46aede
-*.color12:      #46aede
-
-! magenta
-*.color5:       #e32c57
-*.color13:      #e32c57
-
-! cyan
-*.color6:       #d6dbac
-*.color14:      #d6dbac
-
-! white
-*.color7:       #efefef
-*.color15:      #efefef
+!! black
+!*.color0:       #251f1f
+!*.color8:       #5e5e5e
+!
+!! red
+!*.color1:       #eb4509
+!*.color9:       #eb4509
+!
+!! green
+!*.color2:       #94e76b
+!*.color10:      #95e76b
+!
+!! yellow
+!*.color3:       #ffac18
+!*.color11:      #ffac18
+!
+!! blue
+!*.color4:       #46aede
+!*.color12:      #46aede
+!
+!! magenta
+!*.color5:       #e32c57
+!*.color13:      #e32c57
+!
+!! cyan
+!*.color6:       #d6dbac
+!*.color14:      #d6dbac
+!
+!! white
+!*.color7:       #efefef
+!*.color15:      #efefef
 !
 !
 !! URxvt Appearance
-URxvt.letterSpace: 0
+URxvt.letterSpace: -1
 URxvt.lineSpace: 1
-URxvt.geometry: 92x24
-URxvt.internalBorder: 12
+URxvt.geometry: 92x28
+URxvt.internalBorder: 10
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: false
-URxvt.saveline: 2048
+URxvt.saveline: 4048
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
-URxvt.depth: 24
+URxvt.depth: 20
 !URxvt.iso14755: false
 URxvt*termName: rxvt-256color
 
-URxvt.font: 		xft:Hack:size=14
+URxvt.font: 		xft:CodeNewRoman Nerd Font:size=15
+!URxvt.font: 		xft:inconsolata:size=15
 URxvt.cursorColor:	red
 
 

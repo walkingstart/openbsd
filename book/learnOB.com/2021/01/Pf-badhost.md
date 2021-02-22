@@ -3,7 +3,7 @@
 
 Installation guide on OpenBSD, in 10 simple steps
 
-Create a new user on your system, '\_pfbadhost' as example.
+Create a new user on your system, '_pfbadhost' as example.
 
 The user should be created with default shell of nologin, home folder set to /var/empty/ with no password specified (logins disabled).
 
@@ -21,13 +21,13 @@ Download pf-badhost:
   
 Create required files:
   
-  # install -m 640 -o \_pfbadhost -g wheel /dev/null /etc/pf-badhost.txt
+  # install -m 640 -o _pfbadhost -g wheel /dev/null /etc/pf-badhost.txt
   
   # install -d -m 755 -o root -g wheel /var/log/pf-badhost
   
-  # install -m 640 -o \_pfbadhost -g wheel /dev/null /var/log/pf-badhost/pf-badhost.log
+  # install -m 640 -o _pfbadhost -g wheel /dev/null /var/log/pf-badhost/pf-badhost.log
   
-  # install -m 640 -o \_pfbadhost -g wheel /dev/null /var/log/pf-badhost/pf-badhost.log.0.gz
+  # install -m 640 -o _pfbadhost -g wheel /dev/null /var/log/pf-badhost/pf-badhost.log.0.gz
 
 
 Give user '_pfbadhost' strict doas permission for the exact commands the script needs run as superuser.

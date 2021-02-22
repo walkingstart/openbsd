@@ -17,6 +17,10 @@ export ENABLE_WASM=1
  autocutsel -fork
  autocutsel -selection PRIMARY -fork
 
+ #libreoffice 
+SAL_DISABLE_OPENCL=1  
+SAL_DISABLEGL=1
+
 # suppress blue light at night
 redshift -l 40.2732:-76.8867 -g 0.9 &
 
@@ -64,3 +68,4 @@ exec xterm -geometry 1920x1+0+0 -fa "CodeNewRoman Nerd Font:size=12" -fs 12 -bg 
 
 #xterm -name termbar -class termbar -e /home/zero/myown/termbar &
 exec cwm
+#exec sdorfehs

@@ -25,6 +25,8 @@ set -A complete_signify_1 -- -C -G -S -V
 set -A complete_signify_2 -- -q -p -x -c -m -t -z
 set -A complete_signify_3 -- -p -x -c -m -t -z
 
+set -A complete_chown_1 -- $(users)
+
 pgrep -fq '/usr/sbin/vmd'
 if [ $? = 0 ]; then
 	set -A complete_vmctl -- console load reload start stop reset status send receive
@@ -60,6 +62,7 @@ fi
 if [ -x /usr/rbin/rcctl ]; then
 	set -A complete_rcctl_1 -- disable enable get ls order set restart start stop
 	set -A complete_rcctl_2 -- $(rcctl ls all)
+    set -A complete_rcctl_3 -- $(/bin/ls /etc/rc.d)
 fi
 
 set -A complete_make_1 -- \
@@ -88,7 +91,7 @@ set -A complete_git_1 -- \
 	pull push \
 	status
 
-    function reload_completions {
+function reload_completions {
 	if [ -e ~/.ksh_completions ]; then
 		. ~/.ksh_completions
 		echo "ksh completions reloaded"
