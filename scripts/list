@@ -1,6 +1,5 @@
 anki--
 aria2--
-chromium--
 colorls--
 compton--
 exfat-fuse--
@@ -27,17 +26,12 @@ pcmanfm--
 portslist--
 py3-openssl--
 quirks--
-ranger--
-rofi--
 rsync--
 rxvt-unicode--
 samba--
 simple-mtpfs--
 transmission--
 vim--no_x11
-vlc--
-w3m--image
-weechat--
 xclip--
 zathura--
 zathura-pdf-mupdf--
