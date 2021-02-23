@@ -1,0 +1,23 @@
+# shared memory limits (chrome needs a ton)
+kern.shminfo.shmall=3145728
+kern.shminfo.shmmax=2147483647
+kern.shminfo.shmmni=1024
+# semaphores
+kern.shminfo.shmseg=1024
+kern.seminfo.semmns=4096
+kern.seminfo.semmni=1024
+
+kern.maxproc=32768
+kern.maxfiles=65535
+kern.maxvnodes=262144
+kern.somaxconn=2048
+
+kern.bufcachepercent=90
+
+machdep.lidaction=1
+
+# only with USB keyboard
+machdep.forceukbd=1
+
+# danger! but the i5-2520M needs all the help it can get.
+hw.smt=1
