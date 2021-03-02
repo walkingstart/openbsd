@@ -1,0 +1,17 @@
+#!/bin/ksh
+#
+# Run polybar
+
+PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin"
+
+# Kill already running instance
+pkill -u $USER polybar
+while pgrep -u $USER -x polybar >/dev/null; do sleep 1; done
+
+# Start polybar
+#polybar top &
+polybar -c ~/.config/polybar/mockup top &
+
+
+exit 0
+#EOF
