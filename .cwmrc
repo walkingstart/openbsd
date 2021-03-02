@@ -13,7 +13,7 @@ gap 28 0 0 0
 #fontname "inconsolata:pixelsize=20"
 fontname "Noto Mono:pixelsize=20"
 
-borderwidth     1
+borderwidth     0
 color activeborder  "#e6d933"
 #color font      "#eeeeff"
 color inactiveborder    "#708090"

@@ -1,0 +1,84 @@
+[colors]
+bg = #2E3440
+fg = #FFFFFF
+green = #50FA7B
+
+[settings]
+screenchange-reload = true
+
+[bar/top]
+width = 1920
+height = 25
+offset-x = 0
+offset-y = 0
+
+fixed-center = false
+
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = CodeNewRoman NF:style=Book:size=12;3
+
+modules-left = xworkspaces xwindow
+modules-right = sensor network volume kbdlayout battery datetime
+
+[module/battery]
+type = custom/script
+exec = $HOME/scripts/polybar-modules.sh battery
+interval = 10
+
+[module/datetime]
+type = custom/script
+exec = $HOME/scripts/polybar-modules.sh datetime
+interval = 10
+
+[module/kbdlayout]
+type = custom/script
+exec = $HOME/scripts/polybar-modules.sh kbdlayout
+interval = 10
+
+[module/network]
+type = custom/script
+exec = $HOME/scripts/polybar-modules.sh network
+interval = 2
+
+[module/sensor]
+type = custom/script
+exec = $HOME/scripts/polybar-modules.sh sensor
+interval = 2
+
+[module/volume]
+type = custom/script
+exec = $HOME/scripts/polybar-modules.sh volume
+interval = 10
+
+[module/xworkspaces]
+type = internal/xworkspaces
+icon-0 = nogroup;
+icon-1 = one;1
+icon-2 = two;2
+icon-3 = three;3
+icon-4 = four;4
+
+label-active = %icon%
+label-active-foreground = ${colors.bg}
+label-active-background = ${colors.green}
+label-active-padding = 1
+
+label-urgent = %icon%
+label-urgent-padding = 1
+
+label-empty = %icon%
+label-empty-padding = 1
+
+[module/xwindow]
+type = internal/xwindow
+format = <label>
+label =  %title:0:60:...%
+label-empty =

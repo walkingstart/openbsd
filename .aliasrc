@@ -186,7 +186,7 @@ youtube() { youtube-dl -f best --write-sub --sub-lang en --proxy http://127.0.0.
  alias gc="git clone"
  alias ga="git add"
  alias grm="git rm"
- alias gcm="git commit -m"
+ alias gcam="git commit -a -m"
  alias gp="git push"
  alias gpom="git push origin master"
 # alias gpod="git push origin devel"

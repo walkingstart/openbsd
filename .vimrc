@@ -27,30 +27,30 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'lervag/vimtex'
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-let g:vimtex_quickfix_mode = 1
-" use vimtex as default compiler
-let g:vimtex_compiler_latexmk_engines={'_':'-xelatex'}
-let g:vimtex_compiler_latexrun_engines={'_':'xelatex'}
-"let g:vimtex_compiler_latexmk = {
-"        \ 'executable' : 'latexmk',
-"        \ 'options' : [
-"        \   '-xelatex',
-"        \   '-file-line-error',
-"        \   '-synctex=1',
-"        \   '-interaction=nonstopmode',
-"        \ ],
-"        \}
-
-let g:vimtex_quickfix_open_on_warning=0
+    let g:tex_flavor='latex'
+    let g:vimtex_view_method='zathura'
+    let g:vimtex_quickfix_mode=0
+    set conceallevel=1
+    let g:tex_conceal='abdmg'
+    let g:vimtex_quickfix_mode = 1
+    let g:Tex_DefaultTargetFormat = 'pdf'
+    " use vimtex as default compiler
+    let g:vimtex_compiler_latexmk_engines={'_':'-xelatex'}
+    let g:vimtex_compiler_latexrun_engines={'_':'xelatex'}
+"    let g:vimtex_compiler_latexmk = {
+"                \ 'executable' : 'latexmk',
+"                \ 'options' : [
+"                \   '-xelatex',
+"                \   '-file-line-error',
+"                \   '-synctex=1',
+"                \   '-interaction=nonstopmode',
+"                \ ],
+"                \}
+"
+    let g:vimtex_quickfix_open_on_warning=0
 
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'ycm-core/YouCompleteMe' 
 
 call plug#end()
 
@@ -424,23 +424,23 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-let g:input_toggle = 1
-function! Fcitx2en()
-   let s:input_status = system("fcitx-remote")
-   if s:input_status == 2
-      let g:input_toggle = 1
-      let l:a = system("fcitx-remote -c")
-   endif
-endfunction
-
-function! Fcitx2zh()
-   let s:input_status = system("fcitx-remote")
-   if s:input_status != 2 && g:input_toggle == 1
-      let l:a = system("fcitx-remote -o")
-      let g:input_toggle = 0
-   endif
-endfunction
-
-set timeoutlen=150
-autocmd InsertLeave * call Fcitx2en()
-"autocmd InsertEnter * call Fcitx2zh()
+"let g:input_toggle = 1
+"function! Fcitx2en()
+"   let s:input_status = system("fcitx-remote")
+"   if s:input_status == 2
+"      let g:input_toggle = 1
+"      let l:a = system("fcitx-remote -c")
+"   endif
+"endfunction
+"
+"function! Fcitx2zh()
+"   let s:input_status = system("fcitx-remote")
+"   if s:input_status != 2 && g:input_toggle == 1
+"      let l:a = system("fcitx-remote -o")
+"      let g:input_toggle = 0
+"   endif
+"endfunction
+"
+"set timeoutlen=150
+"autocmd InsertLeave * call Fcitx2en()
+""autocmd InsertEnter * call Fcitx2zh()
