@@ -171,7 +171,7 @@ XTerm*on3Clicks              : line
 /* *.color256: 0#1d2021 */
 /* *.color257: 15#ebdbb2 */
 !!!! special
-*.foreground: #93a1a1
+*.foreground: #8EF466
 *.background: #1C1C1C
 !! black
 !*color0: #1b1918
@@ -218,7 +218,7 @@ URxvt*termName: rxvt-256color
 
 URxvt.font: 		xft:CodeNewRoman Nerd Font:size=16
 !URxvt.font: 		xft:inconsolata:size=15
-!URxvt.cursorColor:	red
+URxvt.cursorColor:	red
 
 
 

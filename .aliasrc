@@ -135,7 +135,7 @@ rld-xresources() { xrdb -load ~/.Xresources ;}
 # # handy dandy system related
 # alias ls="colorls -GF"
 # use colorls if it's installed, plain old ls otherwise
-#alias ls="colorls -GF"
+alias ls="colorls -GF"
 alias ll='ls -lhA'
 alias l="ls"
 alias df="df -h"
