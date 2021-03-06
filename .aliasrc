@@ -146,7 +146,7 @@ alias md="mkdir -p"
 alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 #
  alias c="clear"
-youtube() { youtube-dl -f best --write-sub --sub-lang en --proxy http://127.0.0.1:1080 "$1" ;} 
+youtube() { youtube-dl -f best --write-sub --embed-sub --convert-subs srt --sub-lang en --proxy http://127.0.0.1:1080 "$1" ;} 
 #youtube() { youtube-dl -f 'bestvideo[height<=?720]+bestaudio/best[height<=?720]' --proxy http://127.0.0.1:1080 "$1" ;} 
 # alias reload=". $HOME/.kshrc"
 # alias usr1="pkill -USR1"
