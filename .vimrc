@@ -37,6 +37,7 @@ Plug 'lervag/vimtex'
     " use vimtex as default compiler
     let g:vimtex_compiler_latexmk_engines={'_':'-xelatex'}
     let g:vimtex_compiler_latexrun_engines={'_':'xelatex'}
+    let g:Tex_CustomTemplateDirectory='~/scripts/'
 "    let g:vimtex_compiler_latexmk = {
 "                \ 'executable' : 'latexmk',
 "                \ 'options' : [

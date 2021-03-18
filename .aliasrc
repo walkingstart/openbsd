@@ -135,6 +135,7 @@ rld-xresources() { xrdb -load ~/.Xresources ;}
 # # handy dandy system related
 # alias ls="colorls -GF"
 # use colorls if it's installed, plain old ls otherwise
+export LSCOLORS=gxfxcxdxbxegedabagacad
 alias ls="colorls -GF"
 alias ll='ls -lhA'
 alias l="ls"
@@ -178,7 +179,7 @@ youtube() { youtube-dl -f best --write-sub --embed-sub --convert-subs srt --sub-
 # alias em="emacsc"
 #
 # # misc
-# alias xclip="xclip -selection clipboard"
+ alias xclip="xclip -selection clipboard"
 # alias xr="xrdb -merge ~/.Xresources"
 # alias dash="dash -l"
 #
@@ -204,9 +205,9 @@ alias free='free -h'					# human readable
 #alias info='info --vi-keys'		# GNU info act like man command
 #alias ln='ln -iv'
 #alias lsblk='lsblk -o "KNAME,HOTPLUG,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID,MODEL,SERIAL"'
-#alias mkdir='mkdir -p '				# create if not exist, verbose
+alias mkdir='mkdir -p '				# create if not exist, verbose
 #alias mocp='padsp mocp'                                 # moc player working with pulseaudio
-#alias mount='mount | column -t'				# align in column
+alias mount='mount | column -t'				# align in column
 alias mv='mv -iv'					# mv prompt confirmation
 #alias nano='nano -c -$'					# word wrapping
 #alias nvlc='nvlc --no-color'				# vlc black/white color
@@ -388,9 +389,9 @@ tsm-ncurse() { transmission-remote-cli ;}
 #------------------------------------------------------
  #alias sudo='sudo -i'
  #alias sudo='sudo '					# make aliases work with sudo
- #alias ps="ps aux | grep -v grep | grep "
+ alias ps="ps aux | grep -v grep | grep "
  alias ff="find . |grep "
- #alias pp="ps aux |grep "
+ alias pp="ps aux |grep "
  #alias oo="xdg-open "
  #alias emacs="emacs -nw"
 
@@ -407,4 +408,14 @@ alias lsa='ls -ghA'
 #mplayer playlist
 #mplist() { mplayer -playlist <(tree -aif "$1" | awk '/\.(mp3|wav|ogg|avi|mpg|iso)$/'); }
 #mplist(){ mplayer -playlist <(find "$1" -regex '.*\.\(mp3\|wav\|ogg\|avi\|mpg\|iso\)' | sort); }
+extract() {                                                                        
+     case $1 in
+         *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $1;;
+         *.tar.gz|*.tgz) tar xzvf $1;;
+         *.tar.xz|*.txz) tar xJvf $1;;
+         *.zip) unzip $1;;
+         *.rar) unrar x $1;;
+         *.7z) 7z x $1;;
+     esac
+ }
 

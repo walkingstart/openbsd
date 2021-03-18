@@ -15,7 +15,7 @@ set -A _pwr "%{F$_blu}"
 #set -A _net "" "直"
 set -A _lan "%{F$_blu}"
 set -A _wan "%{F$_grn}直" "%{F$_orn}直" "%{F$_red}直"
-set -A _nic "em0" "iwm0"
+set -A _nic "re0" "iwm0"
 set -A _vol "奄" "奔" "墳"
 
 # Functions ------------------------------------------------------------

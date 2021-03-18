@@ -8,7 +8,8 @@ if [ -e ~/.ksh_completions ]; then
         # shellcheck source=/home/qbit/.ksh_completions
             . ~/.ksh_completions
         fi
-
+PATH=$HOME/bin:$PATH
+export PATH
 HISTFILE="$HOME/.ksh_history"
 HISTSIZE=20000
 
